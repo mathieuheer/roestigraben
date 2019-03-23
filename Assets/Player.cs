@@ -10,13 +10,16 @@ public class Player : MonoBehaviour
     }
 
     Vector2 direction = Vector2.zero;
-    [SerializeField]
-    private float speed = 0.3f;
+    public float speed = 0.3f;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+
 
     void Update()
     {
         GetDirection();
         Move();
+        Shoot();
     }
 
     void GetDirection()
@@ -24,24 +27,31 @@ public class Player : MonoBehaviour
         direction = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            direction = Vector2.up;
+            direction += Vector2.up;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            direction = Vector2.left;
+            direction += Vector2.left;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            direction = Vector2.down;
+            direction += Vector2.down;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            direction = Vector2.right;
+            direction += Vector2.right;
         }
     }
 
     void Move()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
+    }
+
+    void Shoot()
+    {
+        if (Input.GetButtonDown("Fire1")){
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 }
