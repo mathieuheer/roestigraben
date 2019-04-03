@@ -32,18 +32,18 @@ public class Patrol : MonoBehaviour
             isFollowing = true;
             beginPatrol = false;
             speed = 5f;
-            follow();
+            Follow();
          
         }else if((guardPoint - transform.position).magnitude > 0.1 && isFollowing ){
-            backToGuardPoint();
+            BackToGuardPoint();
         }else{
-            patrol();
+            Patroling();
         }
 
 
     }
 
-    void follow(){
+    void Follow(){
         if((transform.position - guardPoint).magnitude >= space -0.1){
             goBack = true;
         }
@@ -51,7 +51,7 @@ public class Patrol : MonoBehaviour
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
-    void backToGuardPoint(){
+    void BackToGuardPoint(){
         direction = guardPoint - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
         if((guardPoint - transform.position).magnitude < 0.1){
@@ -61,7 +61,7 @@ public class Patrol : MonoBehaviour
         }
     }
 
-    void patrol(){
+    void Patroling(){
         speed = 2f;
         if(beginPatrol){
             direction = A - transform.position;

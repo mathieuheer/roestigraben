@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pursuer : MonoBehaviour
+public class Teleporter : MonoBehaviour
 {
     
     public float speed = 0.2f;
     public Transform player;
-    public int threatDistance = 5;
+    public int threatDistance = 10;
+    public float countdown = 0.8f;
 
 
     void FixedUpdate(){
         
         if((player.transform.position - transform.position).magnitude < threatDistance){
 
-            Follow();
-         
+            countdown-= Time.deltaTime;
+            if (countdown <= 0){
+                Teleport();
+                countdown = 1;
+            }
         }
 
     }
 
-    void Follow(){
+    void Teleport(){
         Vector3 direction = player.transform.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        transform.position = player.transform.position + direction.normalized * 2;
     }
+
 
 }

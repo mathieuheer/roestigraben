@@ -22,16 +22,16 @@ public class Guard : MonoBehaviour
         if((player.transform.position - transform.position).magnitude < threatDistance &&
             (transform.position - guardPoint).magnitude < space && !goBack){
 
-            follow();
+            Follow();
          
         }else if((guardPoint - transform.position).magnitude > 0.1 ){
-            backToguardPoint();
+            BackToguardPoint();
         }
 
 
     }
 
-    void follow(){
+    void Follow(){
         if((transform.position - guardPoint).magnitude >= space -0.1){
             goBack = true;
         }
@@ -39,7 +39,7 @@ public class Guard : MonoBehaviour
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
-    void backToguardPoint(){
+    void BackToguardPoint(){
         Vector3 direction = guardPoint - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
         if((guardPoint - transform.position).magnitude < 0.1){
