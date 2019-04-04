@@ -8,7 +8,7 @@ public class Teleporter : MonoBehaviour
     public float speed = 0.2f;
     public Transform player;
     public int threatDistance = 10;
-    public float countdown = 0.8f;
+    public float countdown = 1f;
 
 
     void FixedUpdate(){
@@ -18,7 +18,7 @@ public class Teleporter : MonoBehaviour
             countdown-= Time.deltaTime;
             if (countdown <= 0){
                 Teleport();
-                countdown = 1;
+                countdown = 1f;
             }
         }
 
