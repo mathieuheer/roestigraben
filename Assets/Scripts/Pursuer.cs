@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pursuer : MonoBehaviour
+public class Pursuer : Enemy
 {
     
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 5;
+    // public float speed = 0.2f;
+    // public Transform player;
+    // public int threatDistance = 5;
 
 
     void FixedUpdate(){
         
-        if((player.transform.position - transform.position).magnitude < threatDistance){
-
-            Follow();
-         
-        }
+        trigger();
 
     }
 
-    void Follow(){
-        Vector3 direction = player.transform.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-    }
-
+    public override void idle(){}
+    public override void attack(){}
+    public override void retreat(){}
 }
