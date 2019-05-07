@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
     Vector3 object_pos;
     float angle;
     int destroyTime = 5;
+    
     void Shoot()
     {
         mouse_pos = Input.mousePosition;
@@ -124,4 +125,6 @@ public class Player : MonoBehaviour
             Destroy(bulletObject, destroyTime); 
         }
     }
+    
+
 }

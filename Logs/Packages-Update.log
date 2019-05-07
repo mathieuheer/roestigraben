@@ -42,7 +42,11 @@ The following packages were added:
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
 
+<<<<<<< HEAD
 === Tue May  7 09:18:46 2019
+=======
+=== Tue Apr  2 14:28:48 2019
+>>>>>>> origin/enemyMovementTesting
 
 Packages were changed.
 Update Mode: updateDependencies
