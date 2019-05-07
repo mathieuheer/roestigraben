@@ -25,7 +25,7 @@ public class Guard : Enemy
             state = State.Retreating;
             Retreat();
         }
-        Vector3 direction = player.transform.position - transform.position;
+        direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
@@ -33,7 +33,7 @@ public class Guard : Enemy
         if((guardPoint - transform.position).magnitude < 0.1){
              state = State.BeingIdle;
         }
-        Vector3 direction = guardPoint - transform.position;
+        direction = guardPoint - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 

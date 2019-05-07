@@ -353,7 +353,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   firePoint: {fileID: 163900759}
-  bulletPrefab: {fileID: 163900757}
+  bulletPrefab: {fileID: 690946716656336476, guid: fe09732c73adb7348b05d824cf1d995d,
+    type: 3}
   startTimeAttack: 0
   attackPos: {fileID: 163900759}
   whatIsEnemies:
@@ -427,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &262145870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -553,9 +554,10 @@ MonoBehaviour:
   damage: 10
   speed: 4.5
   isMelee: 0
-  attackRange: 10
+  attackRange: 2
   threatDistance: 5
   player: {fileID: 163900759}
+  state: 2
 --- !u!1 &406901701
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &406901702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +590,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba91705fffb7bc4b99d219febc2e9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  damage: 10
+  speed: 2
+  isMelee: 0
+  attackRange: 2
+  threatDistance: 5
+  player: {fileID: 163900759}
+  state: 0
   speed: 2
   player: {fileID: 163900759}
   threatDistance: 5
@@ -740,12 +750,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bfa87e5f89cb1b4287d429c30cdec98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  damage: 10
   speed: 4.5
-  player: {fileID: 163900759}
+  isMelee: 0
+  attackRange: 2
   threatDistance: 5
-  space: 6
+  player: {fileID: 163900759}
+  state: 2
   guardPoint: {x: 0, y: 0, z: 0}
-  goBack: 0
 --- !u!61 &458243717
 BoxCollider2D:
   m_ObjectHideFlags: 0

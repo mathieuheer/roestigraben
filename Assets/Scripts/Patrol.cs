@@ -2,77 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : MonoBehaviour
+public class Patrol : Enemy
 {
-    
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 5;
-    public int space = 6;
+    Vector3 guardPoint;
     public Vector3 A;
     public Vector3 B;
-    public Vector3 guardPoint;
-    public Vector3 path = new Vector3(0, 2, 0);
-    public Vector3 direction;
-    public bool isFollowing = false;
-    public bool goBack = false;
-    bool beginPatrol = true;
+    bool goingToA = true;
+    
 
-    void Awake(){
-         guardPoint = transform.position;
-         A = guardPoint + path;
-         B = guardPoint - path;
+    public override void Awake(){
+         guardPoint = A + (B-A)/2;
     }
 
     void FixedUpdate(){
 
-        if((player.transform.position - transform.position).magnitude < threatDistance &&
-            (transform.position - guardPoint).magnitude < space && !goBack){
-
-            isFollowing = true;
-            beginPatrol = false;
-            speed = 5f;
-            Follow();
-         
-        }else if((guardPoint - transform.position).magnitude > 0.1 && isFollowing ){
-            BackToGuardPoint();
-        }else{
-            Patroling();
-        }
-
-
+        Trigger();
+        IsALive();
     }
-
-    void Follow(){
-        if((transform.position - guardPoint).magnitude >= space -0.1){
-            goBack = true;
+       
+    public override void Approach(){
+        if((transform.position - player.transform.position).magnitude <= attackRange){
+            state = State.Attacking;
+            Attack(); 
+        }
+        if((guardPoint - transform.position).magnitude >= threatDistance - 0.1){
+            state = State.Retreating;
+            Retreat();
         }
         direction = player.transform.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
-    void BackToGuardPoint(){
-        direction = guardPoint - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-        if((guardPoint - transform.position).magnitude < 0.1){
-            beginPatrol = true;
-            isFollowing = false;
-            goBack = false;
+    public override void Retreat(){
+        if((guardPoint - transform.position).magnitude < 0.1){      
+             state = State.BeingIdle;
         }
+        direction = guardPoint - transform.position;
+        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
-    void Patroling(){
-        speed = 2f;
-        if(beginPatrol){
+    public override void Idle(){
+        if((player.transform.position - transform.position).magnitude <= threatDistance){
+            state = State.Approaching;
+            Approach();
+        }
+        if(goingToA){
             direction = A - transform.position;
+        }else{
+            direction = B - transform.position;
         }
         if((A - transform.position).magnitude < 0.1){
-            direction = B - transform.position;
-            beginPatrol = false;
+            goingToA = false;
         }
         if((B - transform.position).magnitude < 0.1){
-            direction = A - transform.position;
-            beginPatrol = false;
+            goingToA = true;
         }
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }

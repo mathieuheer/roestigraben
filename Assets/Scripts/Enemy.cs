@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour {
     public float threatDistance = 5;
     public Transform player;
     public State state;
+    public Vector3 direction;
 
     // states
     public enum State
@@ -61,7 +62,7 @@ public abstract class Enemy : MonoBehaviour {
             state = State.Retreating;
             Retreat();
         }
-        Vector3 direction = player.transform.position - transform.position;
+        direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
