@@ -2,49 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guard : MonoBehaviour
+public class Guard : Enemy
 {
-
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 5;
-    public int space = 6;
     public Vector3 guardPoint;
-    public bool goBack = false;
 
-    void Awake(){
+    public override void Awake(){
          guardPoint = transform.position;
+         state = State.BeingIdle;
     }
 
     void FixedUpdate(){
-        
-
-        if((player.transform.position - transform.position).magnitude < threatDistance &&
-            (transform.position - guardPoint).magnitude < space && !goBack){
-
-            Follow();
-         
-        }else if((guardPoint - transform.position).magnitude > 0.1 ){
-            BackToguardPoint();
-        }
-
-
+        Trigger();
+        IsALive();
     }
 
-    void Follow(){
-        if((transform.position - guardPoint).magnitude >= space -0.1){
-            goBack = true;
+    public override void Approach(){
+        if((transform.position - player.transform.position).magnitude <= attackRange){
+            state = State.Attacking;
+            Attack(); 
+        }
+        if((guardPoint - transform.position).magnitude >= threatDistance - 0.1){
+            state = State.Retreating;
+            Retreat();
         }
         Vector3 direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
-    void BackToguardPoint(){
+    public override void Retreat(){
+        if((guardPoint - transform.position).magnitude < 0.1){
+             state = State.BeingIdle;
+        }
         Vector3 direction = guardPoint - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
-        if((guardPoint - transform.position).magnitude < 0.1){
-            goBack = false;
-        }
     }
 
 
