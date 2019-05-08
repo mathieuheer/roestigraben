@@ -251,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11615234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.78, y: -0.05, z: 0.043}
+  m_LocalPosition: {x: -7.78, y: -0.05, z: 0}
   m_LocalScale: {x: 8.817604, y: 10.008936, z: 6.694}
   m_Children: []
   m_Father: {fileID: 0}
@@ -333,7 +333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163900757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 0.67, z: 0.043}
+  m_LocalPosition: {x: 0.9, y: 0.67, z: 0}
   m_LocalScale: {x: 8.817604, y: 10.008936, z: 6.694}
   m_Children: []
   m_Father: {fileID: 0}
@@ -485,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262145869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.69, y: 4.18, z: 0.043}
+  m_LocalPosition: {x: 8.69, y: 4.18, z: 0}
   m_LocalScale: {x: 8.817604, y: 10.008936, z: 6.694}
   m_Children: []
   m_Father: {fileID: 0}
@@ -558,6 +558,7 @@ MonoBehaviour:
   threatDistance: 5
   player: {fileID: 163900759}
   state: 2
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1 &406901701
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,18 +598,10 @@ MonoBehaviour:
   attackRange: 2
   threatDistance: 5
   player: {fileID: 163900759}
-  state: 0
-  speed: 2
-  player: {fileID: 163900759}
-  threatDistance: 5
-  space: 6
-  A: {x: 0, y: 0, z: 0}
-  B: {x: 0, y: 0, z: 0}
-  guardPoint: {x: 0, y: 0, z: 0}
-  path: {x: 0, y: 3, z: 0}
+  state: 2
   direction: {x: 0, y: 0, z: 0}
-  isFollowing: 0
-  goBack: 0
+  A: {x: 8, y: 2, z: 0}
+  B: {x: 8, y: -2, z: 0}
 --- !u!61 &406901703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -712,7 +705,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406901701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.69, y: 0.54, z: 0.043}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 8.817604, y: 10.008936, z: 6.694}
   m_Children: []
   m_Father: {fileID: 0}
@@ -758,6 +751,7 @@ MonoBehaviour:
   threatDistance: 5
   player: {fileID: 163900759}
   state: 2
+  direction: {x: 0, y: 0, z: 0}
   guardPoint: {x: 0, y: 0, z: 0}
 --- !u!61 &458243717
 BoxCollider2D:
@@ -862,7 +856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458243715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.76, y: -3.45, z: 0.043}
+  m_LocalPosition: {x: 8.76, y: -3.45, z: 0}
   m_LocalScale: {x: 8.817604, y: 10.008936, z: 6.694}
   m_Children: []
   m_Father: {fileID: 0}

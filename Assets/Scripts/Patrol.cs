@@ -4,47 +4,51 @@ using UnityEngine;
 
 public class Patrol : Enemy
 {
-    Vector3 guardPoint;
+    Vector3 Waypoint;
     public Vector3 A;
     public Vector3 B;
     bool goingToA = true;
     
 
     public override void Awake(){
-         guardPoint = A + (B-A)/2;
+         Waypoint = A;
     }
 
     void FixedUpdate(){
-
         Trigger();
-        IsALive();
+        IsAlive();
     }
        
     public override void Approach(){
         if((transform.position - player.transform.position).magnitude <= attackRange){
             state = State.Attacking;
-            Attack(); 
         }
-        if((guardPoint - transform.position).magnitude >= threatDistance - 0.1){
+        Waypoint = A;
+        if((B - transform.position).magnitude < (A - transform.position).magnitude){      
+            Waypoint = B;
+        }
+        if((Waypoint - transform.position).magnitude >= threatDistance - 0.1){
             state = State.Retreating;
-            Retreat();
         }
         direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
     public override void Retreat(){
-        if((guardPoint - transform.position).magnitude < 0.1){      
-             state = State.BeingIdle;
+        Waypoint = A;
+        if((B - transform.position).magnitude < (A - transform.position).magnitude){      
+            Waypoint = B;
         }
-        direction = guardPoint - transform.position;
+        if((Waypoint - transform.position).magnitude < 0.1){      
+            state = State.BeingIdle;
+        }
+        direction = Waypoint - transform.position;
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
     public override void Idle(){
         if((player.transform.position - transform.position).magnitude <= threatDistance){
             state = State.Approaching;
-            Approach();
         }
         if(goingToA){
             direction = A - transform.position;

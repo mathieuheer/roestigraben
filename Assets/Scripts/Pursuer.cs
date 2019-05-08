@@ -7,7 +7,7 @@ public class Pursuer : Enemy
 
     void FixedUpdate(){
         Trigger();
-        IsALive();
+        IsAlive();
     }
 
 }
