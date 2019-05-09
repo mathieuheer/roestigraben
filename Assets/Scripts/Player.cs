@@ -5,12 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Player : Creature
 {
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -33,17 +27,17 @@ public class Player : Creature
             direction += Vector2.left;
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             direction += Vector2.right;
         }
 
-        else if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             direction += Vector2.up;
         }
 
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             direction += Vector2.down;
         }
