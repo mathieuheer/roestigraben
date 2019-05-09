@@ -39,12 +39,8 @@ public class Patrol : Enemy
     }
 
     public override void Idle(){
-        Debug.Log((player.transform.position - transform.position).magnitude);
-        Debug.Log("Player: "+player.transform.position);
-        Debug.Log("Enemy:  "+transform.position);
         if((player.transform.position - transform.position).magnitude <= threatDistance){
             state = State.Approaching;
-            Debug.Log("aproach");
             return;
         }
         direction = waypoints[index].transform.position - transform.position;
