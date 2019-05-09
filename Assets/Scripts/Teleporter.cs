@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : Enemy
 {
     
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 10;
-    public float countdown = 1f;
+    public float countdown = 2f;
+    float timer;
+    public float jumpAhead = 2f;
 
-
-    void FixedUpdate(){
-        
-        if((player.transform.position - transform.position).magnitude < threatDistance){
-
-            countdown-= Time.deltaTime;
-            if (countdown <= 0){
-                Teleport();
-                countdown = 1f;
-            }
-        }
-
+    public override void Awake(){
+        base.Awake();
+        timer = countdown;
     }
 
-    void Teleport(){
-        Vector3 direction = player.transform.position - transform.position;
-        transform.position = player.transform.position + direction.normalized * 2;
+    void FixedUpdate(){
+        Trigger();
+    }
+
+    public override void Approach(){
+        direction = player.transform.position - transform.position;
+        if((direction).magnitude >= threatDistance){
+            state = State.Retreating;
+            return;
+        }
+            timer-= Time.deltaTime;
+        if((direction).magnitude <= jumpAhead){
+            transform.Translate(direction.normalized * speed * Time.deltaTime);
+        }else{
+            if (timer <= 0){
+                transform.position = (Vector2)player.transform.position + direction.normalized * jumpAhead;
+                timer = countdown;
+            }
+        }
     }
 
 

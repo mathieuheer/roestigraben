@@ -5,40 +5,60 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour {
     
     // attributes
-    public int health = 100;
-    public int damage = 10;
     public float speed = 5f;
-    public bool isMelee = false;
-    public float attackRange = 10;
-    public float threatDistance = 15;
+    public int damage = 10;
+    public float threatDistance = 5;
     public Transform player;
+    public State state;
+    protected Vector2 direction;
 
-    // methodes
-    public abstract void idle();
-
-    public void approach(){
-        Vector3 direction = player.transform.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+    // states
+    public enum State
+    {
+        Approaching,
+        BeingIdle,
+        Retreating,
+        Dying,
     }
 
-    public void trigger(){
-        if((player.transform.position - transform.position).magnitude < threatDistance){
-            approach();
+    public virtual void Awake(){
+        state = State.Retreating;
+    }
+   
+    // methodes
+
+     public virtual void Trigger(){
+        switch (state){
+            case State.BeingIdle: Idle();
+            break;
+            case State.Approaching: Approach();
+            break;
+            case State.Retreating: Retreat();
+            break;
         }
     }
 
-    public abstract void attack();
-    public abstract void retreat();
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        Debug.Log("DAMAGE");
-    }
-    public void DoDamage(int damage)
-    {
-        health -= damage;
-        Debug.Log("DAMAGE");
+    public virtual void Idle(){
+        if((player.transform.position - transform.position).magnitude <= threatDistance){
+            state = State.Approaching;
+        }
     }
 
+    public virtual void Approach(){
+        if((player.transform.position - transform.position).magnitude >= threatDistance){
+            state = State.Retreating;
+            return;
+        }
+        direction = player.transform.position - transform.position;
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
+    }
+
+    public virtual void Retreat(){
+        state = State.BeingIdle;
+    }
+
+    public virtual void TakeDamage(int damage){
+        
+    }
 
 }

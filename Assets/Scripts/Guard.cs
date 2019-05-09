@@ -2,49 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guard : MonoBehaviour
+public class Guard : Enemy
 {
+    public Vector2 guardPoint;
 
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 5;
-    public int space = 6;
-    public Vector3 guardPoint;
-    public bool goBack = false;
-
-    void Awake(){
-         guardPoint = transform.position;
+    public override void Awake(){
+        base.Awake();
+        guardPoint = transform.position;
+        state = State.BeingIdle;
     }
 
     void FixedUpdate(){
-        
-
-        if((player.transform.position - transform.position).magnitude < threatDistance &&
-            (transform.position - guardPoint).magnitude < space && !goBack){
-
-            Follow();
-         
-        }else if((guardPoint - transform.position).magnitude > 0.1 ){
-            BackToguardPoint();
-        }
-
-
+        Trigger();
     }
 
-    void Follow(){
-        if((transform.position - guardPoint).magnitude >= space -0.1){
-            goBack = true;
+    public override void Approach(){
+        direction = player.transform.position - transform.position;
+        if((guardPoint -  (Vector2)transform.position).magnitude >= threatDistance){
+            state = State.Retreating;
+            return;
         }
-        Vector3 direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
-    void BackToguardPoint(){
-        Vector3 direction = guardPoint - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-        if((guardPoint - transform.position).magnitude < 0.1){
-            goBack = false;
+    public override void Retreat(){
+        direction = guardPoint -  (Vector2)transform.position;
+        if((direction).magnitude < 0.1){
+             state = State.BeingIdle;
+             return;
         }
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
 
