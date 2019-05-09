@@ -19,19 +19,13 @@ public class Creature : MonoBehaviour
     protected bool isAttacking = false;
 
     // Start is called before the first frame update
-    public virtual void Start()
+    public void Start()
     {
         animator = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer.sprite == null)
             spriteRenderer.sprite = frontFacing;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetDirection(Vector3 direction)
