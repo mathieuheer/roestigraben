@@ -15,7 +15,7 @@ public class Teleporter : Enemy
     }
 
     void FixedUpdate(){
-        Trigger();
+        HandleState();
     }
 
     public override void Approach(){
@@ -26,6 +26,7 @@ public class Teleporter : Enemy
         }
             timer-= Time.deltaTime;
         if((direction).magnitude <= jumpAhead){
+            SetDirection(direction);
             transform.Translate(direction.normalized * speed * Time.deltaTime);
         }else{
             if (timer <= 0){

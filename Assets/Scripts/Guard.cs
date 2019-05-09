@@ -13,7 +13,7 @@ public class Guard : Enemy
     }
 
     void FixedUpdate(){
-        Trigger();
+        HandleState();
     }
 
     public override void Approach(){
@@ -22,6 +22,7 @@ public class Guard : Enemy
             state = State.Retreating;
             return;
         }
+        SetDirection(direction);
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
@@ -31,6 +32,7 @@ public class Guard : Enemy
              state = State.BeingIdle;
              return;
         }
+        SetDirection(direction);
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 

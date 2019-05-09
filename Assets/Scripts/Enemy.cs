@@ -26,7 +26,7 @@ public abstract class Enemy : Creature {
    
     // methodes
 
-     public virtual void Trigger(){
+     public virtual void HandleState(){
         switch (state){
             case State.BeingIdle: Idle();
             break;
@@ -49,6 +49,7 @@ public abstract class Enemy : Creature {
             return;
         }
         direction = player.transform.position - transform.position;
+        SetDirection(direction);
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
