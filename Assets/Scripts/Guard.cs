@@ -14,15 +14,10 @@ public class Guard : Enemy
 
     void FixedUpdate(){
         Trigger();
-        IsAlive();
     }
 
     public override void Approach(){
         direction = player.transform.position - transform.position;
-        if((direction).magnitude <= attackRange){
-            state = State.Attacking;
-            return;
-        }
         if((guardPoint -  (Vector2)transform.position).magnitude >= threatDistance){
             state = State.Retreating;
             return;

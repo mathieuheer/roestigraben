@@ -11,14 +11,9 @@ public class Patrol : Enemy
 
     void FixedUpdate(){
         Trigger();
-        IsAlive();
     }
        
     public override void Approach(){
-        if((player.transform.position - transform.position).magnitude <= attackRange){
-            state = State.Attacking;
-            return;
-        }
         index = getNearestWaypoint();
         if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance){
             state = State.Retreating;

@@ -16,23 +16,22 @@ public class Teleporter : Enemy
 
     void FixedUpdate(){
         Trigger();
-        IsAlive();
     }
 
     public override void Approach(){
-        if((player.transform.position - transform.position).magnitude <= attackRange){
-            state = State.Attacking;
-            return;
-        }
-        if((player.transform.position - transform.position).magnitude >= threatDistance){
+        direction = player.transform.position - transform.position;
+        if((direction).magnitude >= threatDistance){
             state = State.Retreating;
             return;
         }
-        timer-= Time.deltaTime;
-        if (timer <= 0){
-            direction = player.transform.position - transform.position;
-            transform.position = (Vector2)player.transform.position + direction.normalized * jumpAhead;
-            timer = countdown;
+            timer-= Time.deltaTime;
+        if((direction).magnitude <= jumpAhead){
+            transform.Translate(direction.normalized * speed * Time.deltaTime);
+        }else{
+            if (timer <= 0){
+                transform.position = (Vector2)player.transform.position + direction.normalized * jumpAhead;
+                timer = countdown;
+            }
         }
     }
 
