@@ -2,79 +2,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : MonoBehaviour
+public class Patrol : Enemy
 {
-    
-    public float speed = 0.2f;
-    public Transform player;
-    public int threatDistance = 5;
-    public int space = 6;
-    public Vector3 A;
-    public Vector3 B;
-    public Vector3 guardPoint;
-    public Vector3 path = new Vector3(0, 2, 0);
-    public Vector3 direction;
-    public bool isFollowing = false;
-    public bool goBack = false;
-    bool beginPatrol = true;
-
-    void Awake(){
-         guardPoint = transform.position;
-         A = guardPoint + path;
-         B = guardPoint - path;
-    }
+    public bool circle = false;
+    public Transform[] waypoints;
+    int index = 0;
+    bool up = true;
 
     void FixedUpdate(){
-
-        if((player.transform.position - transform.position).magnitude < threatDistance &&
-            (transform.position - guardPoint).magnitude < space && !goBack){
-
-            isFollowing = true;
-            beginPatrol = false;
-            speed = 5f;
-            Follow();
-         
-        }else if((guardPoint - transform.position).magnitude > 0.1 && isFollowing ){
-            BackToGuardPoint();
-        }else{
-            Patroling();
-        }
-
-
+        Trigger();
     }
-
-    void Follow(){
-        if((transform.position - guardPoint).magnitude >= space -0.1){
-            goBack = true;
+       
+    public override void Approach(){
+        index = getNearestWaypoint();
+        if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance){
+            state = State.Retreating;
+            return;
         }
         direction = player.transform.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
-    void BackToGuardPoint(){
-        direction = guardPoint - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-        if((guardPoint - transform.position).magnitude < 0.1){
-            beginPatrol = true;
-            isFollowing = false;
-            goBack = false;
+    public override void Retreat(){
+        index = getNearestWaypoint();
+        direction = waypoints[index].transform.position - transform.position;
+        if((direction).magnitude < 0.1){      
+            state = State.BeingIdle;
+            return;
         }
+        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
-    void Patroling(){
-        speed = 2f;
-        if(beginPatrol){
-            direction = A - transform.position;
+    public override void Idle(){
+        if((player.transform.position - transform.position).magnitude <= threatDistance){
+            state = State.Approaching;
+            return;
         }
-        if((A - transform.position).magnitude < 0.1){
-            direction = B - transform.position;
-            beginPatrol = false;
-        }
-        if((B - transform.position).magnitude < 0.1){
-            direction = A - transform.position;
-            beginPatrol = false;
-        }
+        direction = waypoints[index].transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
+        
+        if((direction).magnitude < 0.1){
+            if(circle){
+                if(index == waypoints.Length-1){
+                    index = 0;
+                }else{
+                    index++; 
+                }
+            }else{
+                if(index == waypoints.Length-1){
+                    up = false;
+                    index--;
+                }else if(index == 0){
+                    up = true;
+                    index++;
+                }else if(up){
+                    index++; 
+                }else{
+                    index--;
+                }
+            }
+        }
+    } 
+
+    int getNearestWaypoint(){
+        int index = 0;
+        for(int i = 0; i<waypoints.Length;i++){
+            if((waypoints[i].transform.position - transform.position).magnitude < (waypoints[index].transform.position - transform.position).magnitude){      
+                index = i;
+            }
+        }
+        return index;
     }
 
 }
