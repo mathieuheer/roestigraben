@@ -8,12 +8,11 @@ public abstract class Enemy : MonoBehaviour {
     public int health = 100;
     public int damage = 10;
     public float speed = 5f;
-    public bool isMelee = false;
     public float attackRange = 2;
     public float threatDistance = 5;
     public Transform player;
     public State state;
-    public Vector3 direction;
+    protected Vector2 direction;
 
     // states
     public enum State
@@ -26,7 +25,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public virtual void Awake(){
-        state = State.BeingIdle;
+        state = State.Retreating;
     }
    
     // methodes
@@ -53,11 +52,13 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public virtual void Approach(){
-        if((transform.position - player.transform.position).magnitude <= attackRange){
+        if((player.transform.position - transform.position).magnitude <= attackRange){
             state = State.Attacking;
+            return;
         }
-        if((player.transform.position - transform.position).magnitude >= threatDistance - 0.1){
+        if((player.transform.position - transform.position).magnitude >= threatDistance){
             state = State.Retreating;
+            return;
         }
         direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
@@ -66,6 +67,7 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void Attack(){
         if((player.transform.position - transform.position).magnitude >= attackRange){
             state = State.Approaching;
+            return;
         }
         if((player.transform.position - transform.position).magnitude >= threatDistance - 0.1){
             state = State.Retreating;

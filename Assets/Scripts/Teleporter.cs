@@ -7,10 +7,11 @@ public class Teleporter : Enemy
     
     public float countdown = 2f;
     float timer;
-    public float jumpAhead = 3f;
+    public float jumpAhead = 2f;
 
     public override void Awake(){
-         timer = countdown;
+        base.Awake();
+        timer = countdown;
     }
 
     void FixedUpdate(){
@@ -19,16 +20,18 @@ public class Teleporter : Enemy
     }
 
     public override void Approach(){
-        if((transform.position - player.transform.position).magnitude <= attackRange){
+        if((player.transform.position - transform.position).magnitude <= attackRange){
             state = State.Attacking;
+            return;
         }
-        if((player.transform.position - transform.position).magnitude >= threatDistance - 0.1){
+        if((player.transform.position - transform.position).magnitude >= threatDistance){
             state = State.Retreating;
+            return;
         }
         timer-= Time.deltaTime;
         if (timer <= 0){
             direction = player.transform.position - transform.position;
-            transform.position = player.transform.position + direction.normalized * jumpAhead;
+            transform.position = (Vector2)player.transform.position + direction.normalized * jumpAhead;
             timer = countdown;
         }
     }

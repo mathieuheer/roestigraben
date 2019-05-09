@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Patrol : Enemy
 {
-    Vector3 Waypoint;
-    public Vector3 A;
-    public Vector3 B;
-    bool goingToA = true;
-    
-
-    public override void Awake(){
-         Waypoint = A;
-    }
+    public bool circle = false;
+    public Transform[] waypoints;
+    int index = 0;
+    bool up = true;
 
     void FixedUpdate(){
         Trigger();
@@ -20,48 +15,72 @@ public class Patrol : Enemy
     }
        
     public override void Approach(){
-        if((transform.position - player.transform.position).magnitude <= attackRange){
+        if((player.transform.position - transform.position).magnitude <= attackRange){
             state = State.Attacking;
+            return;
         }
-        Waypoint = A;
-        if((B - transform.position).magnitude < (A - transform.position).magnitude){      
-            Waypoint = B;
-        }
-        if((Waypoint - transform.position).magnitude >= threatDistance - 0.1){
+        index = getNearestWaypoint();
+        if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance){
             state = State.Retreating;
+            return;
         }
         direction = player.transform.position - transform.position;
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
     public override void Retreat(){
-        Waypoint = A;
-        if((B - transform.position).magnitude < (A - transform.position).magnitude){      
-            Waypoint = B;
-        }
-        if((Waypoint - transform.position).magnitude < 0.1){      
+        index = getNearestWaypoint();
+        direction = waypoints[index].transform.position - transform.position;
+        if((direction).magnitude < 0.1){      
             state = State.BeingIdle;
+            return;
         }
-        direction = Waypoint - transform.position;
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
     public override void Idle(){
+        Debug.Log((player.transform.position - transform.position).magnitude);
+        Debug.Log("Player: "+player.transform.position);
+        Debug.Log("Enemy:  "+transform.position);
         if((player.transform.position - transform.position).magnitude <= threatDistance){
             state = State.Approaching;
+            Debug.Log("aproach");
+            return;
         }
-        if(goingToA){
-            direction = A - transform.position;
-        }else{
-            direction = B - transform.position;
-        }
-        if((A - transform.position).magnitude < 0.1){
-            goingToA = false;
-        }
-        if((B - transform.position).magnitude < 0.1){
-            goingToA = true;
-        }
+        direction = waypoints[index].transform.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
+        
+        if((direction).magnitude < 0.1){
+            if(circle){
+                if(index == waypoints.Length-1){
+                    index = 0;
+                }else{
+                    index++; 
+                }
+            }else{
+                if(index == waypoints.Length-1){
+                    up = false;
+                    index--;
+                }else if(index == 0){
+                    up = true;
+                    index++;
+                }else if(up){
+                    index++; 
+                }else{
+                    index--;
+                }
+            }
+        }
+    } 
+
+    int getNearestWaypoint(){
+        int index = 0;
+        for(int i = 0; i<waypoints.Length;i++){
+            if((waypoints[i].transform.position - transform.position).magnitude < (waypoints[index].transform.position - transform.position).magnitude){      
+                index = i;
+            }
+        }
+        return index;
     }
 
 }

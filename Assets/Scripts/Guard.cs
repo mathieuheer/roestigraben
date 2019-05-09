@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Guard : Enemy
 {
-    public Vector3 guardPoint;
+    public Vector2 guardPoint;
 
     public override void Awake(){
-         guardPoint = transform.position;
-         state = State.BeingIdle;
+        base.Awake();
+        guardPoint = transform.position;
+        state = State.BeingIdle;
     }
 
     void FixedUpdate(){
@@ -17,21 +18,24 @@ public class Guard : Enemy
     }
 
     public override void Approach(){
-        if((transform.position - player.transform.position).magnitude <= attackRange){
-            state = State.Attacking;
-        }
-        if((guardPoint - transform.position).magnitude >= threatDistance - 0.1){
-            state = State.Retreating;
-        }
         direction = player.transform.position - transform.position;
+        if((direction).magnitude <= attackRange){
+            state = State.Attacking;
+            return;
+        }
+        if((guardPoint -  (Vector2)transform.position).magnitude >= threatDistance){
+            state = State.Retreating;
+            return;
+        }
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
     public override void Retreat(){
-        if((guardPoint - transform.position).magnitude < 0.1){
+        direction = guardPoint -  (Vector2)transform.position;
+        if((direction).magnitude < 0.1){
              state = State.BeingIdle;
+             return;
         }
-        direction = guardPoint - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
