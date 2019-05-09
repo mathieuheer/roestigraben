@@ -15,6 +15,7 @@ public class Patrol : Enemy
        
     public override void Approach(){
         index = getNearestWaypoint();
+        Debug.Log((waypoints[index].transform.position - transform.position).magnitude);
         if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance){
             state = State.Retreating;
             return;
@@ -24,7 +25,6 @@ public class Patrol : Enemy
     }
 
     public override void Retreat(){
-        index = getNearestWaypoint();
         direction = waypoints[index].transform.position - transform.position;
         if((direction).magnitude < 0.1){      
             state = State.BeingIdle;

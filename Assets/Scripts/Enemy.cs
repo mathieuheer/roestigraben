@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     public virtual void Awake(){
-        state = State.Retreating;
+        state = State.BeingIdle;
     }
    
     // methodes
