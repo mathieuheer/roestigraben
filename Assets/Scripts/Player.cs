@@ -1,130 +1,98 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour
+public class Player : Creature
 {
-    void Start()
+    // Start is called before the first frame update
+    public override void Start()
     {
-    
-        }
+        base.Start();
+    }
 
-    Vector2 direction = Vector2.zero;
-    public float speed = 0.3f;
-
-    // shooting
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-
+    // Update is called once per frame
     void Update()
     {
-        GetDirection();
         Move();
-        Shoot();
-        Melee();
+        HandleMelee();
     }
 
-
-    void MoveCamera()
-    {
-        // http://answers.unity.com/answers/1290524/view.html
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = transform.position;
-        var c = (mousePosition + playerPosition) / 2;
-        Camera.main.transform.position = (playerPosition + c) / 2 + new Vector3(0, 0, -1); ;
-
-    }
-
-    private Vector3 mousePosition;
-    private Vector3 playerPosition;
     // LateUpdate is called after Update each frame
     void LateUpdate()
     {
         MoveCamera();
     }
 
-    void GetDirection()
+    void Move()
     {
-        direction = Vector2.zero;
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction += Vector2.up;
-        }
+        Vector2 direction = Vector2.zero;
+
         if (Input.GetKey(KeyCode.A))
         {
             direction += Vector2.left;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            direction += Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.D))
+
+        else if (Input.GetKey(KeyCode.D))
         {
             direction += Vector2.right;
         }
-    }
 
-    void Move()
-    {
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-    }
-
-    private float timeAttack;
-    public float startTimeAttack;
-
-    public Transform attackPos;
-    public LayerMask whatIsEnemies;
-    public float attackRange;
-    public int damage = 5;
-
-    void Melee()
-    {
-        if (timeAttack <= 0)
+        else if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetButtonDown("Fire2"))
+            direction += Vector2.up;
+        }
+
+        else if (Input.GetKey(KeyCode.S))
+        {
+            direction += Vector2.down;
+        }
+
+        if (!direction.Equals(Vector2.zero))
+        {
+            SetDirection(direction);
+            transform.Translate(direction.normalized * speed * Time.deltaTime);
+        }
+    }
+
+    void HandleMelee()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (!isAttacking)
             {
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for(int i = 0; i < enemiesToDamage.Length; i++)
+                switch (moveDirection)
                 {
-                    enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
+                    case MoveDirection.Up:
+                        animator.SetTrigger("Attack_Up");
+                        break;
+
+                    case MoveDirection.Down:
+                        animator.SetTrigger("Attack_Down");
+                        break;
+
+                    case MoveDirection.Left:
+                        animator.SetTrigger("Attack_Left");
+                        break;
+
+                    case MoveDirection.Right:
+                        animator.SetTrigger("Attack_Right");
+                        break;
                 }
+
+                isAttacking = true;
             }
-            timeAttack = startTimeAttack;
-        }
-        else
-        {
-            timeAttack -= Time.deltaTime;
         }
     }
 
-    void OnDrawGizmosSelected()
+    void MeeleAnimationEnd()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        isAttacking = false;
     }
 
-    Vector3 mouse_pos;
-    Vector3 object_pos;
-    float angle;
-    int destroyTime = 5;
-    
-    void Shoot()
+    void MoveCamera()
     {
-        mouse_pos = Input.mousePosition;
-        mouse_pos.z = 5.23f; //The distance between the camera and object
-        object_pos = Camera.main.WorldToScreenPoint(firePoint.position);
-        mouse_pos.x = mouse_pos.x - object_pos.x;
-        mouse_pos.y = mouse_pos.y - object_pos.y;
-        angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-        firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        if (Input.GetButtonDown("Fire1")){
-            // Destroy after time
-            GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Destroy(bulletObject, destroyTime); 
-        }
+        Vector3 playerPosition = transform.position;
+        Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
-    
-
 }
