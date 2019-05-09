@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour {
+public abstract class Enemy : Creature {
     
     // attributes
-    public float speed = 5f;
     public int damage = 10;
     public float threatDistance = 5;
     public Transform player;
@@ -56,9 +55,4 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void Retreat(){
         state = State.BeingIdle;
     }
-
-    public virtual void TakeDamage(int damage){
-        
-    }
-
 }
