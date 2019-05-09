@@ -10,7 +10,7 @@ public class Patrol : Enemy
     bool up = true;
 
     void FixedUpdate(){
-        Trigger();
+        HandleState();
     }
        
     public override void Approach(){
@@ -20,6 +20,7 @@ public class Patrol : Enemy
             return;
         }
         direction = player.transform.position - transform.position;
+        SetDirection(direction);
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
@@ -30,6 +31,7 @@ public class Patrol : Enemy
             state = State.BeingIdle;
             return;
         }
+        SetDirection(direction);
         transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
     }
 
@@ -39,6 +41,7 @@ public class Patrol : Enemy
             return;
         }
         direction = waypoints[index].transform.position - transform.position;
+        SetDirection(direction);
         transform.Translate(direction.normalized * speed * Time.deltaTime);
         
         if((direction).magnitude < 0.1){
