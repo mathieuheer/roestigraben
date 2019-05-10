@@ -18,7 +18,7 @@ public class BridgeBlockade : MonoBehaviour, ITriggerable
             {
                 animator.SetTrigger("Disappear");
             }
-            
+            isActive = value;
         }
     }
 
