@@ -56,4 +56,9 @@ public abstract class Enemy : Creature {
     public virtual void Retreat(){
         state = State.BeingIdle;
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+    } 
 }
