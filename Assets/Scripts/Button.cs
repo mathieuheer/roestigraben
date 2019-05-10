@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Button : MonoBehaviour
 {
@@ -16,9 +17,31 @@ public class Button : MonoBehaviour
 
     public Sprite onSprite;
     public Sprite offSprite;
-    public GameObject otherGameObject;
+    public GameObject[] triggerableObjects;
 
-    private ITriggerable triggerable;
+    private bool isOn = false;
+
+    private bool IsOn
+    {
+        get { return isOn; }
+        set
+        {
+            isOn = value;
+            foreach (var t in triggerables)
+            {
+                if(t is ITriggerable)
+                {
+                    t.IsActive = isOn;
+                }
+                else
+                {
+                    Debug.LogAssertion("Element " + Array.IndexOf(triggerables, t) + " is not ITriggerable");
+                }
+            }
+        }
+    }
+
+    private ITriggerable[] triggerables;
     private SpriteRenderer spriteRenderer;
     private float turnOffTime;
     private bool timerIsRunning = false;
@@ -26,7 +49,11 @@ public class Button : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        triggerable = otherGameObject.GetComponentInChildren<ITriggerable>();
+        triggerables = new ITriggerable[triggerableObjects.Length];
+        for(var i=0; i<triggerableObjects.Length; i++)
+        {
+            triggerables[i] = triggerableObjects[i].GetComponentInChildren<ITriggerable>();
+        }
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -34,7 +61,7 @@ public class Button : MonoBehaviour
     {
         if(buttonType == Type.Timed && timerIsRunning && turnOffTime < Time.time)
         {
-            triggerable.IsActive = false;
+            IsOn = false;
             timerIsRunning = false;
             UpdateSprites();
         }
@@ -45,16 +72,16 @@ public class Button : MonoBehaviour
         switch (buttonType)
         {
             case Type.Hold:
-                triggerable.IsActive = true;
+                IsOn = true;
                 break;
 
             case Type.Toggle:
-                triggerable.IsActive = !triggerable.IsActive;
+                IsOn = !IsOn;
                 break;
 
             case Type.Timed:
                 if(!timerIsRunning)
-                    triggerable.IsActive = true;
+                    IsOn = true;
                 break;
         }
 
@@ -66,14 +93,14 @@ public class Button : MonoBehaviour
         switch (buttonType)
         {
             case Type.Hold:
-                triggerable.IsActive = false;
+                IsOn = false;
                 break;
 
             case Type.Toggle:
                 break;
 
             case Type.Timed:
-                if (!timerIsRunning && triggerable.IsActive)
+                if (!timerIsRunning && IsOn)
                 {
                     turnOffTime = Time.time + onTime;
                     timerIsRunning = true;
@@ -86,7 +113,7 @@ public class Button : MonoBehaviour
 
     private void UpdateSprites()
     {
-        if (triggerable.IsActive)
+        if (IsOn)
         {
             spriteRenderer.sprite = onSprite;
         }
