@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Player : Creature
 {
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
         HandleMelee();

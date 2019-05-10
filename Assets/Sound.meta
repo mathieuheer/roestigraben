@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sound.meta
 guid: 640599ab1820d164da962699a7aecbbb
+=======
+guid: 3881f17643d0708488f3324eef3a01a7
+>>>>>>> dev:Assets/ghost.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
