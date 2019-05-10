@@ -2,9 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Player : Creature
 {
+
+    public int numOfHearts = 5;
+    public int maxHealth; 
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite halfHeart;
+
+    public virtual void Awake(){
+        maxHealth = health;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -89,4 +101,31 @@ public class Player : Creature
         Vector3 playerPosition = transform.position;
         Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
+
+    protected override void TakeDamage(int damage){
+        base.TakeDamage(damage);
+        UpdateHearts();
+
+    }
+
+    private void UpdateHearts(){
+        int fullHeartsLeft = health/(maxHealth/numOfHearts);
+        for (int i = 0; i < fullHeartsLeft; i++)
+        {
+            hearts[i].enabled = true;
+            hearts[i].sprite = fullHeart; 
+        }
+        if(health%(maxHealth/numOfHearts) != 0){
+            hearts[fullHeartsLeft].enabled = true;
+            hearts[fullHeartsLeft].sprite = halfHeart;
+        }else{
+            hearts[fullHeartsLeft].enabled = false;
+        }
+        for (int i = fullHeartsLeft+1; i < numOfHearts; i++)
+        {
+            hearts[i].enabled = false;
+        }
+        
+    }
+
 }
