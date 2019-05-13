@@ -20,8 +20,7 @@ public class Patrol : Enemy
             return;
         }
         direction = player.transform.position - transform.position;
-        SetDirection(direction);
-        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
+        Move(direction);
     }
 
     public override void Retreat(){
@@ -31,8 +30,7 @@ public class Patrol : Enemy
             state = State.BeingIdle;
             return;
         }
-        SetDirection(direction);
-        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
+        Move(direction);
     }
 
     public override void Idle(){
@@ -41,9 +39,8 @@ public class Patrol : Enemy
             return;
         }
         direction = waypoints[index].transform.position - transform.position;
-        SetDirection(direction);
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-        
+        Move(direction);
+         
         if((direction).magnitude < 0.1){
             if(circle){
                 if(index == waypoints.Length-1){

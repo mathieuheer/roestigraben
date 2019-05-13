@@ -28,7 +28,13 @@ public class Creature : MonoBehaviour
             spriteRenderer.sprite = frontFacing;
     }
 
-    public void SetDirection(Vector3 direction)
+    public void Move(Vector3 direction)
+    {
+        SetDirection(direction);
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
+    }
+
+    void SetDirection(Vector3 direction)
     {
         direction = direction.normalized;
 

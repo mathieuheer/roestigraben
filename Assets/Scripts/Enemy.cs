@@ -49,8 +49,7 @@ public abstract class Enemy : Creature {
             return;
         }
         direction = player.transform.position - transform.position;
-        SetDirection(direction);
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        Move(direction);
     }
 
     public virtual void Retreat(){

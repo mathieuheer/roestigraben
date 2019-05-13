@@ -8,7 +8,7 @@ public class Player : Creature
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        GetUserInput();
         HandleMelee();
     }
 
@@ -18,7 +18,7 @@ public class Player : Creature
         MoveCamera();
     }
 
-    void Move()
+    void GetUserInput()
     {
         Vector2 direction = Vector2.zero;
 
@@ -44,8 +44,7 @@ public class Player : Creature
 
         if (!direction.Equals(Vector2.zero))
         {
-            SetDirection(direction);
-            transform.Translate(direction.normalized * speed * Time.deltaTime);
+            Move(direction);
         }
     }
 

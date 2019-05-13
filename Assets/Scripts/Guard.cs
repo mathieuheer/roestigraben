@@ -22,8 +22,7 @@ public class Guard : Enemy
             state = State.Retreating;
             return;
         }
-        SetDirection(direction);
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        Move(direction);
     }
 
     public override void Retreat(){
@@ -32,8 +31,7 @@ public class Guard : Enemy
              state = State.BeingIdle;
              return;
         }
-        SetDirection(direction);
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
+        Move(direction);
     }
 
 
