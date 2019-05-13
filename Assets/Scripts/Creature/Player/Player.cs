@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : Creature
 {
 
-    public int numOfHearts = 5;
     public int maxHealth; 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite halfHeart;
+    public TextMeshProUGUI text;
+    int numOfKeys = 0;
 
     public virtual void Awake(){
         maxHealth = health;
@@ -109,23 +111,35 @@ public class Player : Creature
     }
 
     private void UpdateHearts(){
-        int fullHeartsLeft = health/(maxHealth/numOfHearts);
+        int fullHeartsLeft = health/(maxHealth/hearts.Length);
         for (int i = 0; i < fullHeartsLeft; i++)
         {
             hearts[i].enabled = true;
             hearts[i].sprite = fullHeart; 
         }
-        if(health%(maxHealth/numOfHearts) != 0){
+        if(health%(maxHealth/hearts.Length) != 0){
             hearts[fullHeartsLeft].enabled = true;
             hearts[fullHeartsLeft].sprite = halfHeart;
         }else{
             hearts[fullHeartsLeft].enabled = false;
         }
-        for (int i = fullHeartsLeft+1; i < numOfHearts; i++)
+        for (int i = fullHeartsLeft+1; i < hearts.Length; i++)
         {
             hearts[i].enabled = false;
         }
-        
     }
+
+    private void AddKey(){
+        numOfKeys++;
+        text.SetText(numOfKeys.ToString());
+    }
+
+    private void UseKey(){
+        if(numOfKeys > 0){
+            numOfKeys--;
+            text.SetText(numOfKeys.ToString());
+        }
+    }
+
 
 }
