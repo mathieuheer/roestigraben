@@ -6,10 +6,14 @@ public abstract class Enemy : Creature {
     
     // attributes
     public int damage = 10;
+    public float attackRate = 0.5f;
     public float threatDistance = 5;
     public Transform player;
     public State state;
+
     protected Vector2 direction;
+
+    private float nextAttack;
 
     // states
     public enum State
@@ -18,9 +22,11 @@ public abstract class Enemy : Creature {
         BeingIdle,
         Retreating,
         Dying,
+        Attack,
     }
 
     public virtual void Awake(){
+
         state = State.Retreating;
     }
    
@@ -33,6 +39,8 @@ public abstract class Enemy : Creature {
             case State.Approaching: Approach();
             break;
             case State.Retreating: Retreat();
+            break;
+            case State.Attack: Attack();
             break;
         }
     }
@@ -56,8 +64,23 @@ public abstract class Enemy : Creature {
         state = State.BeingIdle;
     }
 
+    public virtual void Attack()
+    {
+        if (Time.time > nextAttack)
+        {
+            nextAttack = Time.time + attackRate;
+            state = State.BeingIdle;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
-        collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+        if(collision.gameObject.tag != "Map")
+        {
+            collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+            collision.gameObject.SendMessage("GetKnockedBack", (Vector3)collision.contacts[0].point - transform.position, SendMessageOptions.DontRequireReceiver);
+            nextAttack = Time.time + attackRate;
+            state = State.Attack;
+        }
     } 
 }

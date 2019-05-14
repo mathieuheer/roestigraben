@@ -82,6 +82,20 @@ public class Creature : MonoBehaviour
             Die();
     }
 
+    void GetKnockedBack(Vector3 direction)
+    {
+        direction.Normalize();
+
+        //Layer mask to check hit-detection only on map (layer 11)
+        int layerMask = 1 << 11;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + direction, direction, 1, layerMask);
+        Debug.DrawRay(transform.position + direction, direction * 2, Color.yellow, 1);
+
+        if (hit.collider == null)
+            transform.Translate((Vector2)direction);
+    }
+
     protected virtual void Die()
     {
         Destroy(gameObject);

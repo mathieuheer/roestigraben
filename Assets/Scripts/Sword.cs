@@ -8,5 +8,6 @@ public class Sword : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         collider.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+        collider.gameObject.SendMessage("GetKnockedBack", collider.transform.position - transform.position, SendMessageOptions.DontRequireReceiver);
     }
 }

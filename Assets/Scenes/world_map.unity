@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 1350469894}
   - component: {fileID: 1350469896}
   - component: {fileID: 1350469895}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Paths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 1920103836}
   - component: {fileID: 1920103839}
   - component: {fileID: 1920103838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4212,9 +4212,9 @@ GameObject:
   - component: {fileID: 2026571728}
   - component: {fileID: 2026571727}
   - component: {fileID: 2026571729}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4357,21 +4357,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2536703125557068940, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
         type: 3}
       propertyPath: otherGameObject.Array.size
@@ -4442,6 +4427,21 @@ PrefabInstance:
       propertyPath: triggerableObjects.Array.data[2]
       value: 
       objectReference: {fileID: 1993351824}
+    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536703125557068931, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f15ce4d0b5e30e14e8f8a5c35d7441fc, type: 3}
 --- !u!1001 &3376585373331273309
