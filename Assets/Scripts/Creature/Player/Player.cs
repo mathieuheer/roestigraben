@@ -13,7 +13,7 @@ public class Player : Creature
     public Sprite fullHeart;
     public Sprite halfHeart;
     public TextMeshProUGUI text;
-    int numOfKeys = 0;
+    public int numOfKeys = 0;
 
     public virtual void Awake(){
         maxHealth = health;
@@ -129,7 +129,7 @@ public class Player : Creature
         }
     }
 
-    private void AddKey(){
+    private void CollectKey(){
         numOfKeys++;
         text.SetText(numOfKeys.ToString());
     }
@@ -139,6 +139,26 @@ public class Player : Creature
             numOfKeys--;
             text.SetText(numOfKeys.ToString());
         }
+    }
+
+
+    public void SavePlayer(){
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer(){
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        health = data.health;
+        numOfKeys = data.numOfKeys;
+
+        Vector3 position;
+        position.x = data.position[0]
+        position.y= data.position[1]
+        position.z = data.position[2]
+        transform.position = position;
+
+
     }
 
 
