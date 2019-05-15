@@ -77,20 +77,27 @@ public class Creature : MonoBehaviour
     void TakeDamage(int damage)
     {
         health -= damage;
+        spriteRenderer.color = Color.red;
 
         if (health <= 0)
             Die();
+
+        Invoke("ResetColor", 0.2f);
+    }
+
+    void ResetColor()
+    {
+        spriteRenderer.color = Color.white;
     }
 
     void GetKnockedBack(Vector3 direction)
     {
         direction.Normalize();
 
-        //Layer mask to check hit-detection only on map (layer 11)
+        //Layer mask to check hit-detection only with map (layer 11)
         int layerMask = 1 << 11;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position + direction, direction, 1, layerMask);
-        Debug.DrawRay(transform.position + direction, direction * 2, Color.yellow, 1);
 
         if (hit.collider == null)
             transform.Translate((Vector2)direction);

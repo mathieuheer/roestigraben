@@ -13,8 +13,6 @@ public abstract class Enemy : Creature {
 
     protected Vector2 direction;
 
-    private float nextAttack;
-
     // states
     public enum State
     {
@@ -66,11 +64,7 @@ public abstract class Enemy : Creature {
 
     public virtual void Attack()
     {
-        if (Time.time > nextAttack)
-        {
-            nextAttack = Time.time + attackRate;
-            state = State.BeingIdle;
-        }
+        Invoke("Retreat", attackRate);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -79,7 +73,6 @@ public abstract class Enemy : Creature {
         {
             collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
             collision.gameObject.SendMessage("GetKnockedBack", (Vector3)collision.contacts[0].point - transform.position, SendMessageOptions.DontRequireReceiver);
-            nextAttack = Time.time + attackRate;
             state = State.Attack;
         }
     } 
