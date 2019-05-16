@@ -797,12 +797,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &713950168 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3709496014883938749, guid: 06b0bd4a3fa926846b8518b394bc9889,
-    type: 3}
-  m_PrefabInstance: {fileID: 3709496014444182499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &852552680
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +980,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 713950168}
+      objectReference: {fileID: 104493310}
     - target: {fileID: 3929176050966403436, guid: 7ea907a9a013880489f3ffde3e2c2149,
         type: 3}
       propertyPath: speed
@@ -1315,7 +1309,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 713950168}
+      objectReference: {fileID: 104493310}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a0530d3917f27448e5db2d9a95a463, type: 3}
 --- !u!1 &1273664566
@@ -2708,8 +2702,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 104493310}
+        m_MethodName: SavePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
