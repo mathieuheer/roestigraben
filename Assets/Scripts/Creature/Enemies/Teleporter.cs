@@ -20,7 +20,7 @@ public class Teleporter : Enemy
 
     public override void Approach(){
         direction = player.transform.position - transform.position;
-        if((direction).magnitude >= threatDistance){
+        if((direction).magnitude >= threatDistance || player.health <= 0){
             state = State.Retreating;
             return;
         }

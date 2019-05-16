@@ -7,7 +7,7 @@ using TMPro;
 
 public class Player : Creature
 {
-
+    
     public int maxHealth; 
     public Image[] hearts;
     public Sprite fullHeart;
@@ -110,22 +110,35 @@ public class Player : Creature
 
     }
 
-    private void UpdateHearts(){
-        int fullHeartsLeft = health/(maxHealth/hearts.Length);
-        for (int i = 0; i < fullHeartsLeft; i++)
-        {
-            hearts[i].enabled = true;
-            hearts[i].sprite = fullHeart; 
-        }
-        if(health%(maxHealth/hearts.Length) != 0){
-            hearts[fullHeartsLeft].enabled = true;
-            hearts[fullHeartsLeft].sprite = halfHeart;
+    protected override void Die(){
+        GetComponent<Renderer>().enabled = false;
+        this.gameObject.SetActive(false);
+
+    }
+
+    public void UpdateHearts(){
+        if(health > 0){
+            int fullHeartsLeft = health/(maxHealth/hearts.Length);
+            for (int i = 0; i < fullHeartsLeft; i++)
+            {
+                hearts[i].enabled = true;
+                hearts[i].sprite = fullHeart; 
+            }
+            if(health%(maxHealth/hearts.Length) != 0){
+                hearts[fullHeartsLeft].enabled = true;
+                hearts[fullHeartsLeft].sprite = halfHeart;
+            }else{
+                hearts[fullHeartsLeft].enabled = false;
+            }
+            for (int i = fullHeartsLeft+1; i < hearts.Length; i++)
+            {
+                hearts[i].enabled = false;
+            }
         }else{
-            hearts[fullHeartsLeft].enabled = false;
-        }
-        for (int i = fullHeartsLeft+1; i < hearts.Length; i++)
-        {
-            hearts[i].enabled = false;
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                 hearts[i].enabled = false;
+            }
         }
     }
 
@@ -141,11 +154,12 @@ public class Player : Creature
         }
     }
 
-    public void SavePlayer(){
+     public void SavePlayer(){
         SaveSystem.SavePlayer(this);
     }
 
     public void LoadPlayer(){
+        
         PlayerData data = SaveSystem.LoadPlayer();
 
         health = data.health;
@@ -159,7 +173,10 @@ public class Player : Creature
 
         UpdateHearts();
 
-    }
+        GetComponent<Renderer>().enabled = true;
+        this.gameObject.SetActive(true);
+
+    } 
 
 
 }
