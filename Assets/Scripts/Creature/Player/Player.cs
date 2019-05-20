@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement; 
 
 public class Player : Creature
 {
@@ -24,6 +25,7 @@ public class Player : Creature
     {
         Move();
         HandleMelee();
+        OpenMenu();
     }
 
     // LateUpdate is called after Update each frame
@@ -154,7 +156,7 @@ public class Player : Creature
         }
     }
 
-     public void SavePlayer(){
+    public void SavePlayer(){
         SaveSystem.SavePlayer(this);
     }
 
@@ -177,6 +179,13 @@ public class Player : Creature
         this.gameObject.SetActive(true);
 
     } 
+
+    void OpenMenu(){
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
 
 
 }
