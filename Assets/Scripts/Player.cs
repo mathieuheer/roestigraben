@@ -5,6 +5,20 @@ using UnityEngine.EventSystems;
 
 public class Player : Creature
 {
+
+    static AudioSource audioSrc;
+
+
+    new void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer.sprite == null)
+            spriteRenderer.sprite = frontFacing;
+        audioSrc = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -21,6 +35,18 @@ public class Player : Creature
     void GetUserInput()
     {
         Vector2 direction = Vector2.zero;
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        }
+        else
+        {
+            audioSrc.Stop();
+        }
 
         if (Input.GetKey(KeyCode.A))
         {
