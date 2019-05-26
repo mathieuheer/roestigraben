@@ -5,12 +5,13 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip playerWalkSound, playerHitSound, enemyDeathSound;
+    public static AudioClip playerHitSound, enemyDeathSound;
     static AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
     {
-        playerWalkSound = Resources.Load<AudioClip>("walk");
+        enemyDeathSound = Resources.Load<AudioClip>("enemyHit");
+        playerHitSound = Resources.Load<AudioClip>("hit");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -23,8 +24,11 @@ public class SoundManagerScript : MonoBehaviour
     public static void PlaySound(string clip) {
         switch (clip)
         {
-            case "walk":
-                audioSrc.PlayOneShot(playerWalkSound);
+            case "hit":
+                audioSrc.PlayOneShot(playerHitSound);
+                break;
+            case "enemyHit":
+                audioSrc.PlayOneShot(enemyDeathSound);
                 break;
         }
     }

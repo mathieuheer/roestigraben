@@ -8,15 +8,18 @@ public class Player : Creature
 
     static AudioSource audioSrc;
 
-
+    // for audio
     new void Start()
     {
-        animator = GetComponent<Animator>();
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer.sprite == null)
-            spriteRenderer.sprite = frontFacing;
+        base.Start();
         audioSrc = GetComponent<AudioSource>();
+    }
+
+    // for audio
+    new void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        SoundManagerScript.PlaySound("hit");
     }
 
     // Update is called once per frame

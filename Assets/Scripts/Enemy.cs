@@ -27,10 +27,17 @@ public abstract class Enemy : Creature {
 
         state = State.Retreating;
     }
-   
+
+    // for audio
+    new void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        SoundManagerScript.PlaySound("enemyHit");
+    }
+
     // methodes
 
-     public virtual void HandleState(){
+    public virtual void HandleState(){
         switch (state){
             case State.BeingIdle: Idle();
             break;
