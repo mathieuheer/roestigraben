@@ -16,6 +16,17 @@ public class Player : Creature
     public TextMeshProUGUI text;
     public int numOfKeys = 0;
 
+    static AudioSource audioSrc;
+
+    // for audio
+    new void Start()
+    {
+        base.Start();
+        audioSrc = GetComponent<AudioSource>();
+    }
+
+
+
     public virtual void Awake(){
         maxHealth = health;
     }
@@ -36,6 +47,20 @@ public class Player : Creature
     void Move()
     {
         Vector2 direction = Vector2.zero;
+
+        // walk sound
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        }
+        else
+        {
+            audioSrc.Stop();
+        }
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -105,10 +130,10 @@ public class Player : Creature
         Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
 
-    protected override void TakeDamage(int damage){
+    new void TakeDamage(int damage){
         base.TakeDamage(damage);
         UpdateHearts();
-
+        SoundManagerScript.PlaySound("hit");
     }
 
     protected override void Die(){

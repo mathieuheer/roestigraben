@@ -28,11 +28,17 @@ public class Creature : MonoBehaviour
             spriteRenderer.sprite = frontFacing;
     }
 
-    public void SetDirection(Vector3 direction)
+    public void Move(Vector3 direction)
+    {
+        SetDirection(direction);
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
+    }
+
+    protected void SetDirection(Vector3 direction)
     {
         direction = direction.normalized;
 
-        if(Mathf.Abs(direction.x) >= Mathf.Abs(direction.y))
+        if (Mathf.Abs(direction.x) >= Mathf.Abs(direction.y))
         {
             moveDirection = (direction.x < 0) ? MoveDirection.Left : MoveDirection.Right;
         }
@@ -68,12 +74,33 @@ public class Creature : MonoBehaviour
         }
     }
 
-    protected virtual void TakeDamage(int damage)
+    protected void TakeDamage(int damage)
     {
         health -= damage;
+        spriteRenderer.color = Color.red;
 
         if (health <= 0)
             Die();
+
+        Invoke("ResetColor", 0.2f);
+    }
+
+    void ResetColor()
+    {
+        spriteRenderer.color = Color.white;
+    }
+
+    void GetKnockedBack(Vector3 direction)
+    {
+        direction.Normalize();
+
+        //Layer mask to check hit-detection only with map (layer 11)
+        int layerMask = 1 << 11;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + direction, direction, 1, layerMask);
+
+        if (hit.collider == null)
+            transform.Translate((Vector2)direction);
     }
 
     protected virtual void Die()
