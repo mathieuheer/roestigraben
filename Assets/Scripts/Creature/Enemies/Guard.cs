@@ -18,7 +18,7 @@ public class Guard : Enemy
 
     public override void Approach(){
         direction = player.transform.position - transform.position;
-        if((guardPoint -  (Vector2)transform.position).magnitude >= threatDistance){
+        if((guardPoint -  (Vector2)transform.position).magnitude >= threatDistance || player.health <= 0){
             state = State.Retreating;
             return;
         }

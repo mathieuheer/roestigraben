@@ -8,7 +8,7 @@ public abstract class Enemy : Creature {
     public int damage = 10;
     public float attackRate = 0.5f;
     public float threatDistance = 5;
-    public Transform player;
+    public Player player;
     public State state;
 
     protected Vector2 direction;
@@ -51,13 +51,13 @@ public abstract class Enemy : Creature {
     }
 
     public virtual void Idle(){
-        if((player.transform.position - transform.position).magnitude <= threatDistance){
+        if((player.transform.position - transform.position).magnitude <= threatDistance && player.health > 0){
             state = State.Approaching;
         }
     }
 
     public virtual void Approach(){
-        if((player.transform.position - transform.position).magnitude >= threatDistance){
+        if((player.transform.position - transform.position).magnitude >= threatDistance || player.health <= 0){
             state = State.Retreating;
             return;
         }
