@@ -168,7 +168,7 @@ public class Player : Creature
         }
     }
 
-    private void CollectKey(){
+    public void CollectKey(){
         numOfKeys++;
         text.SetText(numOfKeys.ToString());
     }
