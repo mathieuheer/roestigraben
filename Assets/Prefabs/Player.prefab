@@ -78,7 +78,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &3709496014149293003
@@ -243,6 +243,17 @@ MonoBehaviour:
   backFacing: {fileID: 21300000, guid: 32cedae4ab298124eb1be8a602a14188, type: 3}
   leftFacing: {fileID: 21300000, guid: edda70a9477dff9469aac17557f8ee2a, type: 3}
   rightFacing: {fileID: 21300000, guid: 6f8cbfa67b6608d48931a15c33949b7a, type: 3}
+  maxHealth: 500
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fullHeart: {fileID: 21300000, guid: cae93908db528b24489f1c61c6efa8fe, type: 3}
+  halfHeart: {fileID: 21300000, guid: 16a2e0057c437094b8cb9b277fafaa52, type: 3}
+  text: {fileID: 0}
+  numOfKeys: 0
 --- !u!95 &3709496014883938746
 Animator:
   serializedVersion: 3
