@@ -44,8 +44,24 @@ public abstract class Enemy : Creature {
     }
 
     public virtual void Idle(){
-        if((player.transform.position - transform.position).magnitude <= threatDistance){
-            state = State.Approaching;
+        if ((player.transform.position - transform.position).magnitude <= threatDistance)
+        {
+            Vector2 direction = player.transform.position - transform.position;
+
+            LayerMask layerMask = LayerMask.GetMask("Enemy");
+            int mask = layerMask.value;
+            mask = ~mask;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, mask, Mathf.NegativeInfinity, Mathf.Infinity);
+            Debug.DrawRay(transform.position, direction, Color.magenta, 2);
+
+            Debug.Log("NULL? - " + (hit.collider != null));
+            Debug.Log("Player? - " + (hit.collider == player));
+            Debug.Log("Tag - " + hit.collider.tag);
+            if (hit.collider != null && hit.collider.tag == player.tag)
+            {
+                state = State.Approaching;
+            }
         }
     }
 
