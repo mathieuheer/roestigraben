@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8857462141936294011}
   - component: {fileID: 8857462141936294010}
   - component: {fileID: 8857462141936294007}
+  - component: {fileID: 2060565329090500342}
   m_Layer: 0
   m_Name: TriggerHint
   m_TagString: Untagged
@@ -96,3 +97,19 @@ CircleCollider2D:
   m_Offset: {x: 0.48493385, y: 0.5}
   serializedVersion: 2
   m_Radius: 0.38449192
+--- !u!114 &2060565329090500342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857462141936294006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3783b09f63833214ca717b8124a0d7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Hint
+    sentences:
+    - Press Left-Mouse-Button to attack.
