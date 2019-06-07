@@ -15,7 +15,7 @@ public class Patrol : Enemy
        
     public override void Approach(){
         index = getNearestWaypoint();
-        if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance){
+        if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance || player.health <= 0){
             state = State.Retreating;
             return;
         }

@@ -74,7 +74,7 @@ public class Creature : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    protected virtual void TakeDamage(int damage)
     {
         health -= damage;
         spriteRenderer.color = Color.red;
