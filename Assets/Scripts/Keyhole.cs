@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Keyhole : MonoBehaviour
+public class Keyhole : MonoBehaviour, ITrigger
 {
     public Sprite openSprite;
     public Sprite closedSprite;
     public GameObject[] triggerableObjects;
 
-    private bool isOpen = false;
-    private bool IsOpen
+    private bool isOn = false;
+    public bool IsOn
     {
-        get { return isOpen; }
+        get { return isOn; }
         set
         {
-            isOpen = value;
+            isOn = value;
             foreach (var t in triggerables)
             {
                 if (t is ITriggerable)
                 {
-                    t.IsActive = isOpen;
+                    t.IsActive = isOn;
                 }
                 else
                 {
@@ -53,7 +53,7 @@ public class Keyhole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsOpen) return;
+        if (IsOn) return;
 
         Player player = collision.GetComponent<Player>();
 
@@ -62,7 +62,7 @@ public class Keyhole : MonoBehaviour
             if(player.numOfKeys > 0)
             {
                 player.UseKey();
-                IsOpen = true;
+                IsOn = true;
                 UpdateSprites();
             }
         }
@@ -71,7 +71,7 @@ public class Keyhole : MonoBehaviour
 
     private void UpdateSprites()
     {
-        if (IsOpen)
+        if (IsOn)
         {
             spriteRenderer.sprite = openSprite;
         }

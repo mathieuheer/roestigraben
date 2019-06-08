@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Button : MonoBehaviour
+public class Button : MonoBehaviour, ITrigger
 {
     public enum Type
     {
@@ -21,7 +21,7 @@ public class Button : MonoBehaviour
 
     private bool isOn = false;
 
-    private bool IsOn
+    public bool IsOn
     {
         get { return isOn; }
         set
