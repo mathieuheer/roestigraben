@@ -26,5 +26,6 @@ public class TriggerHint : MonoBehaviour
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        Destroy(this.gameObject);
     }
 }
