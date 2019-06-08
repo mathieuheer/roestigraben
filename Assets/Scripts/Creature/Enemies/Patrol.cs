@@ -38,13 +38,10 @@ public class Patrol : Enemy
         Move(direction);
     }
 
-    public override void Idle()
-    {
-        if ((player.transform.position - transform.position).magnitude <= threatDistance && player.health > 0)
-        {
-            state = State.Approaching;
-            return;
-        }
+    public override void Idle(){
+        base.Idle();
+        if (state != State.BeingIdle) return;
+
         direction = waypoints[index].transform.position - transform.position;
         Move(direction);
 

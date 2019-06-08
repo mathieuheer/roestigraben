@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
          SaveSystem.SavePlayer(player);
     }
 
-    public void Load(){
+    public virtual void Load(){
 
         PlayerData data = SaveSystem.LoadPlayer();
 
@@ -62,9 +62,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Menu(){
-        Scene sceneToLoad = SceneManager.GetSceneByName("Menu");
-        SceneManager.LoadScene(sceneToLoad.name, LoadSceneMode.Additive);
-        SceneManager.MoveGameObjectToScene(player.gameObject, sceneToLoad);
-        // SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu");
     }
 }
