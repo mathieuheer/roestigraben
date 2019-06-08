@@ -83,4 +83,18 @@ public abstract class Enemy : Creature {
             state = State.Attack;
         }
     } 
+
+    public GameObject droppableItem = null;
+    protected override void Die()
+    {
+        Drop();
+        base.Die();
+    }
+    public void Drop()
+    {
+        if (droppableItem != null)
+        {
+            var droppedItem = Instantiate(droppableItem, this.transform.position, Quaternion.identity, this.transform.parent);
+        }
+    }
 }

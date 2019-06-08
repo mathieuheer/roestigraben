@@ -171,6 +171,7 @@ public class Player : Creature
     public void CollectKey(){
         numOfKeys++;
         text.SetText(numOfKeys.ToString());
+        SoundManagerScript.PlaySound("collectKey");
     }
 
     private void UseKey(){
