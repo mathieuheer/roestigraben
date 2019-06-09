@@ -31,7 +31,7 @@ public class RiddleManager : MonoBehaviour
         if (o)
         {
 
-            triggerable.IsActive = false;
+            triggerable.IsActive = true;
         }
     }
 }
