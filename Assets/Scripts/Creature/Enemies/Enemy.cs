@@ -89,11 +89,13 @@ public abstract class Enemy : Creature {
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag != "Map")
+        if (collision.gameObject.tag != "Map")
         {
-            collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-            collision.gameObject.SendMessage("GetKnockedBack", (Vector3)collision.contacts[0].point - transform.position, SendMessageOptions.DontRequireReceiver);
-            state = State.Attack;
+            if (collision.gameObject.tag == "Player") { 
+                collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+                collision.gameObject.SendMessage("GetKnockedBack", (Vector3)collision.contacts[0].point - transform.position, SendMessageOptions.DontRequireReceiver);
+                state = State.Attack;
+            }
         }
     } 
 
