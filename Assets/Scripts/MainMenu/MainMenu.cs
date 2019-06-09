@@ -7,7 +7,7 @@ public class MainMenu : PauseMenu
 {
 
     public void NewGame(){
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level1");
     }
 
     public override void Load(){
