@@ -15,6 +15,7 @@ public class Player : Creature
     public Sprite halfHeart;
     public TextMeshProUGUI text;
     public int numOfKeys = 0;
+    public bool hasSword = false;
 
     static AudioSource audioSrc;
 
@@ -91,7 +92,7 @@ public class Player : Creature
 
     void HandleMelee()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && hasSword)
         {
             if (!isAttacking)
             {
@@ -171,6 +172,12 @@ public class Player : Creature
     public void CollectKey(){
         numOfKeys++;
         text.SetText(numOfKeys.ToString());
+        SoundManagerScript.PlaySound("collectKey");
+    }
+
+    public void CollectSword()
+    {
+        hasSword = true;
         SoundManagerScript.PlaySound("collectKey");
     }
 
