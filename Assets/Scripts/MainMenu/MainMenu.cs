@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
-public class MainMenu : PauseMenu
+public class MainMenu : MonoBehaviour
 {
+    public static PauseMenu pauseMenu;
 
     public void NewGame(){
         SceneManager.LoadScene(1);
+        PauseMenu.newGame = true;
     }
 
-    public override void Load(){
+    public void LoadGame(){
 
         SceneManager.LoadScene(1);
-
-        base.Load();
+        PauseMenu.newGame = false;
     }
 
     public void Exit(){

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    public static bool newGame = true;
 
     public GameObject pauseMenuUI;
     public Player player;
@@ -34,16 +35,17 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Save(){
-         SaveSystem.SavePlayer(player);
+        SaveSystem.SavePlayer(player);
     }
 
-    public virtual void Load(){
+    public void Load(){
 
         PlayerData data = SaveSystem.LoadPlayer();
 
         player.health = data.health;
         player.numOfKeys = data.numOfKeys;
-
+        player.maxHealth = data.maxHealth;
+        
         Vector3 position;
         position.x = data.position[0];
         position.y= data.position[1];
@@ -55,13 +57,30 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<Renderer>().enabled = true;
         player.gameObject.SetActive(true);
 
-        GameIsPaused = false;
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        Resume();
 
     }
 
     public void Menu(){
         SceneManager.LoadScene("Menu");
     }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(!newGame){
+            Load();
+        }else{
+            Save();
+        }
+    }
+
 }

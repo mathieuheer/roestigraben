@@ -118,7 +118,13 @@ public class Player : Creature
     }
 
     public void UpdateHearts(){
-        if(health > 0){
+        if(health == maxHealth){
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                hearts[i].enabled = true;
+                hearts[i].sprite = fullHeart; 
+            }
+        }else if(health > 0){
             int fullHeartsLeft = health/(maxHealth/hearts.Length);
             for (int i = 0; i < fullHeartsLeft; i++)
             {
