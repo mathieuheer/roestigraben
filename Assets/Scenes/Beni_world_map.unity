@@ -568,8 +568,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 597316132}
   player: {fileID: 104493310}
-=======
->>>>>>> origin/levels
 --- !u!1001 &855535465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,7 +756,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e896175b57c13c24bb855ead455cd18c, type: 3}
-<<<<<<< HEAD
 --- !u!1 &977668217
 GameObject:
   m_ObjectHideFlags: 0

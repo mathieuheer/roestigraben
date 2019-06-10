@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: eb9a4b4cb3e404145a18b96d2352a15e
   - enabled: 1
-    path: Assets/Scenes/Beni_world_map.unity
-    guid: feaaec11d04631049989fc70b9ef7cb4
-  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: fb01b6fa6f00c9c49ba92ef4d0836fa5
   - enabled: 1

@@ -16,6 +16,7 @@ public class Player : Creature
     public TextMeshProUGUI text;
     public int numOfKeys = 0;
     public bool hasSword = false;
+    public int level = 0;
 
     static AudioSource audioSrc;
 
@@ -26,11 +27,6 @@ public class Player : Creature
         audioSrc = GetComponent<AudioSource>();
     }
 
-
-
-    public virtual void Awake(){
-        maxHealth = health;
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -131,8 +127,14 @@ public class Player : Creature
         Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
 
-    new void TakeDamage(int damage){
-        base.TakeDamage(damage);
+    protected override void TakeDamage(int damage){
+        health -= damage;
+        spriteRenderer.color = Color.red;
+
+        if (health <= 0)
+            Die();
+
+        Invoke("ResetColor", 0.2f);
         UpdateHearts();
         SoundManagerScript.PlaySound("hit");
     }

@@ -42,9 +42,10 @@ public class PauseMenu : MonoBehaviour
 
         PlayerData data = SaveSystem.LoadPlayer();
 
-        player.health = data.health;
-        player.numOfKeys = data.numOfKeys;
+        Player.health = data.health;
+        Player.numOfKeys = data.numOfKeys;
         player.maxHealth = data.maxHealth;
+        player.level = data.level;
         
         Vector3 position;
         position.x = data.position[0];
@@ -57,6 +58,9 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<Renderer>().enabled = true;
         player.gameObject.SetActive(true);
 
+        // SceneManager.LoadScene(player.level);
+        SceneManager.LoadScene(2);
+
         Resume();
 
     }
@@ -65,22 +69,22 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    // void OnEnable()
+    // {
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    // }
 
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    // void OnDisable()
+    // {
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        if(!newGame){
-            Load();
-        }else{
-            Save();
-        }
-    }
+    // void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+    //     if(!newGame){
+    //         Load();
+    //     }else{
+    //         Save();
+    //     }
+    // }
 
 }
