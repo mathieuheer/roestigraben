@@ -9,68 +9,86 @@ public class Patrol : Enemy
     int index = 0;
     bool up = true;
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         HandleState();
     }
-       
-    public override void Approach(){
+
+    public override void Approach()
+    {
         index = getNearestWaypoint();
-        if((waypoints[index].transform.position - transform.position).magnitude >= threatDistance || player.health <= 0){
+        if ((waypoints[index].transform.position - transform.position).magnitude >= threatDistance || player.health <= 0)
+        {
             state = State.Retreating;
             return;
         }
         direction = player.transform.position - transform.position;
-        SetDirection(direction);
-        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
+        Move(direction);
     }
 
-    public override void Retreat(){
+    public override void Retreat()
+    {
         index = getNearestWaypoint();
         direction = waypoints[index].transform.position - transform.position;
-        if((direction).magnitude < 0.1){      
+        if ((direction).magnitude < 0.1)
+        {
             state = State.BeingIdle;
             return;
         }
-        SetDirection(direction);
-        transform.Translate(direction.normalized * 1.5f*speed * Time.deltaTime);
+        Move(direction);
     }
 
     public override void Idle(){
-        if((player.transform.position - transform.position).magnitude <= threatDistance  && player.health > 0){
-            state = State.Approaching;
-            return;
-        }
+        base.Idle();
+        if (state != State.BeingIdle) return;
+
         direction = waypoints[index].transform.position - transform.position;
-        SetDirection(direction);
-        transform.Translate(direction.normalized * speed * Time.deltaTime);
-        
-        if((direction).magnitude < 0.1){
-            if(circle){
-                if(index == waypoints.Length-1){
+        Move(direction);
+
+        if ((direction).magnitude < 0.1)
+        {
+            if (circle)
+            {
+                if (index == waypoints.Length - 1)
+                {
                     index = 0;
-                }else{
-                    index++; 
                 }
-            }else{
-                if(index == waypoints.Length-1){
+                else
+                {
+                    index++;
+                }
+            }
+            else
+            {
+                if (index == waypoints.Length - 1)
+                {
                     up = false;
                     index--;
-                }else if(index == 0){
+                }
+                else if (index == 0)
+                {
                     up = true;
                     index++;
-                }else if(up){
-                    index++; 
-                }else{
+                }
+                else if (up)
+                {
+                    index++;
+                }
+                else
+                {
                     index--;
                 }
             }
         }
-    } 
+    }
 
-    int getNearestWaypoint(){
+    int getNearestWaypoint()
+    {
         int index = 0;
-        for(int i = 0; i<waypoints.Length;i++){
-            if((waypoints[i].transform.position - transform.position).magnitude < (waypoints[index].transform.position - transform.position).magnitude){      
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            if ((waypoints[i].transform.position - transform.position).magnitude < (waypoints[index].transform.position - transform.position).magnitude)
+            {
                 index = i;
             }
         }

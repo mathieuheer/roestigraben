@@ -15,6 +15,18 @@ public class Player : Creature
     public Sprite halfHeart;
     public TextMeshProUGUI text;
     public int numOfKeys = 0;
+    public bool hasSword = false;
+
+    static AudioSource audioSrc;
+
+    // for audio
+    new void Start()
+    {
+        base.Start();
+        audioSrc = GetComponent<AudioSource>();
+    }
+
+
 
     public virtual void Awake(){
         maxHealth = health;
@@ -36,6 +48,20 @@ public class Player : Creature
     void Move()
     {
         Vector2 direction = Vector2.zero;
+
+        // walk sound
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        }
+        else
+        {
+            audioSrc.Stop();
+        }
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -66,7 +92,7 @@ public class Player : Creature
 
     void HandleMelee()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && hasSword)
         {
             if (!isAttacking)
             {
@@ -105,10 +131,10 @@ public class Player : Creature
         Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
 
-    protected override void TakeDamage(int damage){
+    new void TakeDamage(int damage){
         base.TakeDamage(damage);
         UpdateHearts();
-
+        SoundManagerScript.PlaySound("hit");
     }
 
     protected override void Die(){
@@ -149,12 +175,19 @@ public class Player : Creature
         }
     }
 
-    private void CollectKey(){
+    public void CollectKey(){
         numOfKeys++;
         text.SetText(numOfKeys.ToString());
+        SoundManagerScript.PlaySound("collectKey");
     }
 
-    private void UseKey(){
+    public void CollectSword()
+    {
+        hasSword = true;
+        SoundManagerScript.PlaySound("collectKey");
+    }
+
+    public void UseKey(){
         if(numOfKeys > 0){
             numOfKeys--;
             text.SetText(numOfKeys.ToString());

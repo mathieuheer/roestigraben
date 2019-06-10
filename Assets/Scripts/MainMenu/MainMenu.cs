@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     public static PauseMenu pauseMenu;
 
     public void NewGame(){
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level1");
         PauseMenu.newGame = true;
     }
 
