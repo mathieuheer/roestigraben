@@ -15,6 +15,7 @@ public class Cube : MonoBehaviour, ITriggerable
             if (value)
             {
                 animator.SetTrigger("Despawn");
+                SoundManagerScript.PlaySound("cubeRespawn");
             }
             isActive = value;
         }

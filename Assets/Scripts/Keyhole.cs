@@ -61,6 +61,7 @@ public class Keyhole : MonoBehaviour, ITrigger
         {
             if(player.numOfKeys > 0)
             {
+                SoundManagerScript.PlaySound("useKey");
                 player.UseKey();
                 IsOn = true;
                 UpdateSprites();
