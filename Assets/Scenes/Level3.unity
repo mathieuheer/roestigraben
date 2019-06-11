@@ -5780,6 +5780,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7630228549074902780, guid: f37651c67613abc4196aebfbaf46353d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7630228549074902776, guid: f37651c67613abc4196aebfbaf46353d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5884,16 +5899,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f37651c67613abc4196aebfbaf46353d, type: 3}
@@ -6050,41 +6055,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[0]
-      value: 
-      objectReference: {fileID: 606639128}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[1]
-      value: 
-      objectReference: {fileID: 606639127}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[2]
-      value: 
-      objectReference: {fileID: 606639126}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[3]
-      value: 
-      objectReference: {fileID: 606639125}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[4]
-      value: 
-      objectReference: {fileID: 606639124}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 606639123}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hasSword
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3709496014883938749, guid: 06b0bd4a3fa926846b8518b394bc9889,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6139,6 +6109,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[0]
+      value: 
+      objectReference: {fileID: 606639128}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[1]
+      value: 
+      objectReference: {fileID: 606639127}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[2]
+      value: 
+      objectReference: {fileID: 606639126}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[3]
+      value: 
+      objectReference: {fileID: 606639125}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[4]
+      value: 
+      objectReference: {fileID: 606639124}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 606639123}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hasSword
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b0bd4a3fa926846b8518b394bc9889, type: 3}

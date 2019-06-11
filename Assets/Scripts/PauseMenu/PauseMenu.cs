@@ -42,8 +42,8 @@ public class PauseMenu : MonoBehaviour
 
         PlayerData data = SaveSystem.LoadPlayer();
 
-        Player.health = data.health;
-        Player.numOfKeys = data.numOfKeys;
+        player.health = data.health;
+        player.numOfKeys = data.numOfKeys;
         player.maxHealth = data.maxHealth;
         player.level = data.level;
         
