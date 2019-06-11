@@ -57,7 +57,6 @@ public class PauseMenu : MonoBehaviour
         player.GetComponent<Renderer>().enabled = true;
         player.gameObject.SetActive(true);
 
-        // SceneManager.LoadScene(player.level);
         SceneManager.LoadScene(2);
 
         Resume();
