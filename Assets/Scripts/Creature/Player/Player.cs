@@ -139,10 +139,8 @@ public class Player : Creature
         GetComponent<Renderer>().enabled = false;
         this.gameObject.SetActive(false);
 
-        transform.position = respawnPoint;
-
-        GetComponent<Renderer>().enabled = true;
-        this.gameObject.SetActive(true);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
 
     }
 
