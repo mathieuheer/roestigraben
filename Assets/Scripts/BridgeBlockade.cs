@@ -19,6 +19,7 @@ public class BridgeBlockade : MonoBehaviour, ITriggerable
                 animator.SetTrigger("Disappear");
             }
             isActive = value;
+            SoundManagerScript.PlaySound("bridgeBlockade");
         }
     }
 

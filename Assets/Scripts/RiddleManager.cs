@@ -22,16 +22,12 @@ public class RiddleManager : MonoBehaviour
 
     void Update()
     {
-        bool o = true;
+        bool activated = true;
         foreach (var t in triggers)
         {
-            o = t.IsOn;
-            if (!o) break;
+            activated = t.IsOn;
+            if (!activated) break;
         }
-        if (o)
-        {
-
-            triggerable.IsActive = true;
-        }
+        triggerable.IsActive = activated;
     }
 }
