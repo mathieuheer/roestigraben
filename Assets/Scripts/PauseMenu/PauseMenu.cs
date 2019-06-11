@@ -45,7 +45,6 @@ public class PauseMenu : MonoBehaviour
         player.health = data.health;
         player.numOfKeys = data.numOfKeys;
         player.maxHealth = data.maxHealth;
-        player.level = data.level;
         
         Vector3 position;
         position.x = data.position[0];

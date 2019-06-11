@@ -10,13 +10,11 @@ public class PlayerData
     public int numOfKeys;
     public float[] position;
     public int maxHealth;
-    public int level = 0;
 
     public PlayerData(Player player){
         health = player.health;
         numOfKeys = player.numOfKeys;
         maxHealth = player.maxHealth;
-        level =  player.level;
 
         position = new float[3];
         position[0] = player.transform.position.x;

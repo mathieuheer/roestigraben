@@ -16,13 +16,14 @@ public class Player : Creature
     public TextMeshProUGUI text;
     public int numOfKeys = 0;
     public bool hasSword = false;
-    public int level = 0;
+    Vector3 respawnPoint;
 
     static AudioSource audioSrc;
 
     // for audio
     new void Start()
     {
+        respawnPoint = transform.position;
         base.Start();
         audioSrc = GetComponent<AudioSource>();
     }
@@ -127,21 +128,21 @@ public class Player : Creature
         Camera.main.transform.position = playerPosition + new Vector3(0, 0, -1);
     }
 
-    protected override void TakeDamage(int damage){
-        health -= damage;
-        spriteRenderer.color = Color.red;
-
-        if (health <= 0)
-            Die();
-
-        Invoke("ResetColor", 0.2f);
+    new void TakeDamage(int damage){
+        base.TakeDamage(damage);
         UpdateHearts();
         SoundManagerScript.PlaySound("hit");
     }
 
     protected override void Die(){
+
         GetComponent<Renderer>().enabled = false;
         this.gameObject.SetActive(false);
+
+        transform.position = respawnPoint;
+
+        GetComponent<Renderer>().enabled = true;
+        this.gameObject.SetActive(true);
 
     }
 
