@@ -57,6 +57,8 @@ public abstract class Enemy : Creature {
 
             LayerMask layerMask = LayerMask.GetMask("Enemy");
             int mask = layerMask.value;
+            layerMask = LayerMask.GetMask("Ignore Raycast");
+            mask |= layerMask.value;
             mask = ~mask;
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, mask, Mathf.NegativeInfinity, Mathf.Infinity);

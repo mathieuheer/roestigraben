@@ -6239,6 +6239,11 @@ PrefabInstance:
       propertyPath: hasSword
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b0bd4a3fa926846b8518b394bc9889, type: 3}
 --- !u!1 &736623945 stripped
@@ -9076,6 +9081,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 561570244299858988, guid: acd33724a475be84fb66c50dd4554661,
+        type: 3}
+      propertyPath: levelName
+      value: Level3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 561570244299858986, guid: acd33724a475be84fb66c50dd4554661,
         type: 3}
       propertyPath: m_Offset.x
@@ -9085,11 +9095,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.87417746
-      objectReference: {fileID: 0}
-    - target: {fileID: 561570244299858988, guid: acd33724a475be84fb66c50dd4554661,
-        type: 3}
-      propertyPath: levelName
-      value: Level4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acd33724a475be84fb66c50dd4554661, type: 3}
