@@ -1333,12 +1333,12 @@ PrefabInstance:
     - target: {fileID: 4176735702215006473, guid: e896175b57c13c24bb855ead455cd18c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.505769
+      value: 10.63
       objectReference: {fileID: 0}
     - target: {fileID: 4176735702215006473, guid: e896175b57c13c24bb855ead455cd18c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.79
+      value: -14.73
       objectReference: {fileID: 0}
     - target: {fileID: 4176735702215006473, guid: e896175b57c13c24bb855ead455cd18c,
         type: 3}
@@ -1394,12 +1394,12 @@ PrefabInstance:
         type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
-      objectReference: {fileID: 2131010567}
+      objectReference: {fileID: 1918424329}
     - target: {fileID: 4176735702215006469, guid: e896175b57c13c24bb855ead455cd18c,
         type: 3}
       propertyPath: waypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1918424329}
+      objectReference: {fileID: 2131010567}
     - target: {fileID: 4176735702215006469, guid: e896175b57c13c24bb855ead455cd18c,
         type: 3}
       propertyPath: waypoints.Array.data[2]
@@ -1415,6 +1415,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 177127623}
+    - target: {fileID: 4176735702215006469, guid: e896175b57c13c24bb855ead455cd18c,
+        type: 3}
+      propertyPath: threatDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e896175b57c13c24bb855ead455cd18c, type: 3}
 --- !u!1001 &340605170
@@ -1964,7 +1969,7 @@ PrefabInstance:
     - target: {fileID: 8325631406656258615, guid: 82a0530d3917f27448e5db2d9a95a463,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30.46
+      value: -30.08
       objectReference: {fileID: 0}
     - target: {fileID: 8325631406656258615, guid: 82a0530d3917f27448e5db2d9a95a463,
         type: 3}
@@ -17430,6 +17435,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630228549074902780, guid: f37651c67613abc4196aebfbaf46353d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
         type: 3}
