@@ -45,6 +45,7 @@ public class Button : MonoBehaviour, ITrigger
     private SpriteRenderer spriteRenderer;
     private float turnOffTime;
     private bool timerIsRunning = false;
+    private GameObject trigger = null;
 
     // Start is called before the first frame update
     void Start()
@@ -69,46 +70,53 @@ public class Button : MonoBehaviour, ITrigger
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (buttonType)
+        if(trigger == null)
         {
-            case Type.Hold:
-                IsOn = true;
-                break;
-
-            case Type.Toggle:
-                IsOn = !IsOn;
-                break;
-
-            case Type.Timed:
-                if(!timerIsRunning)
+            trigger = collision.gameObject;
+            switch (buttonType)
+            {
+                case Type.Hold:
                     IsOn = true;
-                break;
-        }
+                    break;
 
-        UpdateSprites();
+                case Type.Toggle:
+                    IsOn = !IsOn;
+                    break;
+
+                case Type.Timed:
+                    if (!timerIsRunning)
+                        IsOn = true;
+                    break;
+            }
+
+            UpdateSprites();
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-
-        switch (buttonType)
+        if(trigger != null && trigger == collision.gameObject)
         {
-            case Type.Hold:
-                IsOn = false;
-                break;
+            trigger = null;
+            switch (buttonType)
+            {
+                case Type.Hold:
+                    IsOn = false;
+                    break;
 
-            case Type.Toggle:
-                break;
+                case Type.Toggle:
+                    break;
 
-            case Type.Timed:
-                if (!timerIsRunning && IsOn)
-                {
-                    turnOffTime = Time.time + onTime;
-                    timerIsRunning = true;
-                }
-                break;
+                case Type.Timed:
+                    if (!timerIsRunning && IsOn)
+                    {
+                        turnOffTime = Time.time + onTime;
+                        timerIsRunning = true;
+                    }
+                    break;
+            }
+
+            UpdateSprites();
         }
-
-        UpdateSprites();
     }
 
     private void UpdateSprites()
