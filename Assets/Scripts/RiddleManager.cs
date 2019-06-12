@@ -9,6 +9,8 @@ public class RiddleManager : MonoBehaviour
 
     private ITrigger[] triggers;
     private ITriggerable triggerable;
+
+    private bool soundPlayed = false;
     void Start()
     {
         triggers = new ITrigger[triggerObjects.Length];
@@ -29,5 +31,15 @@ public class RiddleManager : MonoBehaviour
             if (!activated) break;
         }
         triggerable.IsActive = activated;
+
+        if (activated && !soundPlayed)
+        {
+            soundPlayed = true;
+            SoundManagerScript.PlaySound("reward");
+        }
+        else if(!activated)
+        {
+            soundPlayed = false;
+        }
     }
 }

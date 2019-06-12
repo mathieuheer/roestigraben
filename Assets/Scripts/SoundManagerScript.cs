@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip playerHitSound, enemyDeathSound, collectKeySound, useKeySound, bridgeSound, cubeRespawnSound, slay;
+    public static AudioClip playerHitSound, enemyDeathSound, collectKeySound, useKeySound, bridgeSound, cubeRespawnSound, slay, rewardSound;
     static AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,7 @@ public class SoundManagerScript : MonoBehaviour
         cubeRespawnSound = Resources.Load<AudioClip>("cubeRespawn");
         useKeySound = Resources.Load<AudioClip>("useKey");
         slay = Resources.Load<AudioClip>("slay");
+        rewardSound = Resources.Load<AudioClip>("rewardSound");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -49,6 +50,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "slay":
                 audioSrc.PlayOneShot(slay);
+                break;
+            case "reward":
+                audioSrc.PlayOneShot(rewardSound);
                 break;
         }
     }
