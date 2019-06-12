@@ -1946,11 +1946,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8857462141936294010, guid: a4b02cef1dfad8f418f026394c74cc32,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2060565329090500342, guid: a4b02cef1dfad8f418f026394c74cc32,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -1970,6 +1965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogue.sentences.Array.data[1]
       value: '...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857462141936294010, guid: a4b02cef1dfad8f418f026394c74cc32,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b02cef1dfad8f418f026394c74cc32, type: 3}
@@ -2179,7 +2179,7 @@ PrefabInstance:
     - target: {fileID: 7630228549074902780, guid: f37651c67613abc4196aebfbaf46353d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7630228549349948552, guid: f37651c67613abc4196aebfbaf46353d,
         type: 3}

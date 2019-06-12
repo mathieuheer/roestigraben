@@ -93,6 +93,7 @@ public class Player : Creature
         {
             if (!isAttacking)
             {
+                SoundManagerScript.PlaySound("slay");
                 switch (moveDirection)
                 {
                     case MoveDirection.Up:
