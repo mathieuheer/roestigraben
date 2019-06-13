@@ -6563,46 +6563,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[0]
-      value: 
-      objectReference: {fileID: 606639128}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[1]
-      value: 
-      objectReference: {fileID: 606639127}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[2]
-      value: 
-      objectReference: {fileID: 606639126}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[3]
-      value: 
-      objectReference: {fileID: 606639125}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hearts.Array.data[4]
-      value: 
-      objectReference: {fileID: 606639124}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 606639123}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: hasSword
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
-        type: 3}
-      propertyPath: maxHealth
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 3709496014883938749, guid: 06b0bd4a3fa926846b8518b394bc9889,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6657,6 +6617,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[0]
+      value: 
+      objectReference: {fileID: 606639128}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[1]
+      value: 
+      objectReference: {fileID: 606639127}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[2]
+      value: 
+      objectReference: {fileID: 606639126}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[3]
+      value: 
+      objectReference: {fileID: 606639125}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hearts.Array.data[4]
+      value: 
+      objectReference: {fileID: 606639124}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 606639123}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: hasSword
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709496014883938745, guid: 06b0bd4a3fa926846b8518b394bc9889,
+        type: 3}
+      propertyPath: maxHealth
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b0bd4a3fa926846b8518b394bc9889, type: 3}
@@ -9658,6 +9658,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 561570244299858988, guid: acd33724a475be84fb66c50dd4554661,
+        type: 3}
+      propertyPath: levelName
+      value: Level3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 561570244299858986, guid: acd33724a475be84fb66c50dd4554661,
         type: 3}
       propertyPath: m_Offset.x
@@ -9667,11 +9672,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.87417746
-      objectReference: {fileID: 0}
-    - target: {fileID: 561570244299858988, guid: acd33724a475be84fb66c50dd4554661,
-        type: 3}
-      propertyPath: levelName
-      value: Level3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acd33724a475be84fb66c50dd4554661, type: 3}
