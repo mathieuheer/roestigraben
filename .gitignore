@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Tile
+_8bit_textures/
+_8bit_textures.meta
